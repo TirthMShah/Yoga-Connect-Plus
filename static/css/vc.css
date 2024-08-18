@@ -1,0 +1,42 @@
+body {
+    background-color: #D3D3D3 !important;
+}
+
+.video-container {
+    width: 90%;
+    height: 120vh;
+    background-color: #006064;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 90px;
+    margin-bottom: 10px;
+}
+
+.main-video {
+    flex-grow: 1;
+
+}
+
+.main-video img {
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+}
+
+.participants {
+    display: flex;
+    background-color: #00838f;
+}
+
+.participant {
+    min-width: 100px;
+    height: 15vh;
+    margin: 10px;
+    background-color: #00acc1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

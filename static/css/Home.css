@@ -1,0 +1,174 @@
+.data,
+svg {
+    animation: linear animate-in;
+    animation-timeline: view();
+}
+
+
+/* Content */
+.content {
+    margin-top: 90vh;
+    background-color: #D3D3D3 !important;
+    color: black;
+    font-size: 25px;
+    width: 100% !important;
+}
+
+.heading,
+.heading-1 {
+    text-align: center;
+    font-size: 50px;
+    color: black;
+}
+
+/* /Content */
+
+/* Accordian */
+.accordion-button:not(.collapsed) {
+    color: #007bff;
+}
+
+.accordion-body {
+    font-size: 16px;
+}
+
+/* /Accordian */
+
+/* Carousel */
+.carousel {
+    z-index: -1;
+}
+
+.carousel-item>img {
+    height: 90vh;
+    width: 100%;
+}
+
+/* /Carousel */
+
+
+/* Data */
+.data {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.data p {
+    font-size: xx-large;
+}
+
+/* /Data */
+
+/* Angles-down */
+.angles-down {
+    animation: hide-angles-down linear;
+    animation-timeline: scroll();
+    animation-range: 20vh 100vh;
+}
+
+@keyframes hide-angles-down {
+    to {
+        opacity: 0;
+    }
+}
+
+/* /Angles-down */
+
+.human-body {
+    width: 207px;
+    position: relative;
+    height: 460px;
+    display: block;
+    margin: 40px auto;
+}
+
+.human-body svg:hover {
+    cursor: pointer;
+}
+
+.human-body svg:hover path {
+    fill: #194f83;
+}
+
+.human-body svg {
+    position: absolute;
+    left: 50%;
+    fill: #0D1B2A;
+}
+
+.human-body svg.face {
+    margin-left: -28.5px;
+    top: -6px;
+}
+
+.human-body svg.shoulder {
+    margin-left: -53.5px;
+    top: 69px;
+}
+
+.human-body svg.arm {
+    margin-left: -78px;
+    top: 112px;
+}
+
+.human-body svg.cheast {
+    margin-left: -43.5px;
+    top: 88px;
+}
+
+.human-body svg.stomach {
+    margin-left: -37.5px;
+    top: 130px;
+}
+
+.human-body svg.legs {
+    margin-left: -46.5px;
+    top: 205px;
+    z-index: 9999;
+}
+
+.human-body svg.hands {
+    margin-left: -102.5px;
+    top: 224px;
+}
+
+#area {
+    display: block;
+    width: 100%;
+    clear: both;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+    font-family: Courier New;
+    color: #a5a5a5;
+}
+
+#area #data {
+    color: black;
+}
+
+/* 
+@keyframes reveal {
+    from {
+        opacity: 0;
+        clip-path: inset(45% 20% 45% 20%);
+    }
+
+    to {
+        opacity: 1;
+        clip-path: inset(0% 0% 0% 0%);
+    }
+}
+
+.revealing-image {
+view-timeline-name: --revealing-image;
+view-timeline-axis: block;
+
+animation: linear reveal both;
+animation-timeline: --revealing-image;
+
+animation-range: cover 0% cover 40%;
+}
+
+*/

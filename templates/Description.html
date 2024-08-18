@@ -1,0 +1,77 @@
+{% extends "Skeleton.html" %}
+
+{% block styles %}
+  <link rel="stylesheet" href="static/css/Main.css">
+  <link rel="stylesheet" href="static/css/Description.css">
+    
+    
+{% endblock styles %}
+
+{% block body %}
+<!-- Content. -->
+
+<!-- Progress bar to display page loaded. -->
+<div id="progress"></div>
+<!-- /Progress bar to display page loaded. -->
+
+<!-- Details. -->
+<div class="container p-5" style="margin-top:50px">
+    
+    <p class="heading text-center" style="font-size:50px!important">{{data.body_part | title}} Yoga</p>
+    
+    <div class="data">
+        <p class="heading">Description</p>
+        <p class="detail">{{data.definition}}</p>
+    </div>
+    
+    <div class="data">
+        <p class="heading">Benifits</p>
+        <ul>
+            {% for benefit in data.benefits %}
+                <li class="detail">
+                    <p>{{benefit}}</p>
+                </li>
+            {% endfor %}
+
+        </ul>    
+    </div>
+    
+    <div class="data">
+        <p class="heading">Techniques</p>
+        <ul>
+            {% for technique in data.techniques %}
+                <li class="detail">
+                    <p >{{technique}}</p>
+                </li>
+            {% endfor %}
+
+        </ul>    </div>
+    
+    <div class="data">
+        <p class="heading">Duration</p>
+        <p class="detail">{{data.duration}}</p>
+    </div>
+    
+    <div class="data">
+        <p class="heading">Results</p>
+        <p class="detail">{{data.results}}</p>
+    </div>
+    
+    <div class="data">
+        <p class="heading">Safety Consideration</p>
+        <ul>
+            {% for safety in data.safety_Considerations %}
+                <li class="detail">
+                    <p >{{safety}}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+<!-- /Details. -->
+
+<!-- /Content. -->
+{% endblock body %}
+
+{% block scripts %}{% endblock scripts %}

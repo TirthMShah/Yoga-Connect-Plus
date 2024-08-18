@@ -1,0 +1,45 @@
+body {
+    justify-content: center;
+    align-items: center;
+    background-color: #0D1B2A !important;
+}
+
+* {
+    color: #E0E4CC;
+    font-size: x-small;
+    font-weight: bold;
+}
+
+a {
+    color: #E0E4CC;
+    text-decoration: none;
+
+}
+
+a:hover {
+    color: blue;
+}
+
+.input-field {
+    background: #0D1B2A;
+    color: #E0E4CC;
+    border-color: black;
+}
+
+
+.signIn-box {
+    background-color: #132a42;
+}
+
+/* For Forgot Password Page */
+#mobile_cross {
+    position: relative;
+    top: -20px;
+    left: -13px;
+}
+
+#mobile_check {
+    position: relative;
+    top: -20px;
+    left: -13px;
+}

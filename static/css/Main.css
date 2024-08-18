@@ -1,0 +1,91 @@
+:root {
+    --navbar_height: 80px;
+}
+
+footer {
+    width: 100%;
+    background-color: #0D1B2A;
+    font-family: sans-serif;
+    font-style: italic;
+    color: #E0E4CC;
+    min-height: calc(45vh - var(--navbar_height))
+}
+
+/* To remove the scrollbar panel. */
+::-webkit-scrollbar {
+    display: none;
+}
+
+.footer-height {
+    max-height: calc(80vh - var(--navbar_height))
+}
+
+* {
+    font-family: "Smooch Sans",
+        sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: small;
+}
+
+.navbar {
+    background-color: #0d1b2a80;
+    height: var(--navbar_height);
+    align-self: center;
+    transition: transform 0.3s;
+    width: 100%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item a,
+.dropdown a {
+    color: #E0E4CC;
+}
+
+.nav--hidden {
+    transform: translateY(calc(-1*var(--navbar_height)));
+}
+
+body {
+    background-color: #D3D3D3 !important;
+}
+
+.nav-link:hover {
+    color: aquamarine !important;
+}
+
+.nav-item a:active {
+    color: aquamarine;
+}
+
+.style-offcanvas {
+    background-color: rgb(13, 27, 42);
+
+}
+
+.bar {
+    border: 1px solid white;
+    margin: 6px 0px;
+    width: 30px;
+}
+
+.bars {
+    background-color: rgb(13, 27, 42, 0.5) !important;
+    border-color: rgb(13, 27, 42, 0.5) !important;
+}
+
+@keyframes animate-in {
+    entry 0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    entry 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+html {
+    scroll-timeline: --page-scroll block;
+}

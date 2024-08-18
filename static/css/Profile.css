@@ -1,0 +1,153 @@
+.post-img {
+    width: 100%;
+}
+
+.post-card {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #08294b;
+    /* Oceanic color */
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 50%
+}
+
+.post-card a {
+    display: block;
+    width: 10px;
+    font-size: 100%;
+}
+
+.post-card:hover {
+    transform: scale(1.03);
+}
+
+.container {
+    margin-top: 40px;
+    /* margin-bottom: 20px; */
+}
+
+.reaction-icons {
+    display: flex;
+    cursor: pointer;
+}
+
+.user-details-box {
+    background-color: #0D1B2A;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.modal-content {
+    background-color: #08294b;
+    color: white !important;
+    /* Deeper oceanic blue */
+}
+
+.btn-trainer {
+    /* Dark oceanic blue */
+    color: white;
+    border: none;
+}
+
+.btn-trainer:hover {
+    background-color: green;
+}
+
+@keyframes sticky-parallax-header-move-and-size {
+    from {
+        height: 100vh;
+        width: 100%;
+        font-size: calc(4vw + 1em);
+        color: #fff;
+    }
+
+    to {
+        height: 10vh;
+        width: 100%;
+        font-size: 2em;
+        color: #E0E4CC;
+        text-align: left;
+    }
+}
+
+.user-details-box {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    animation: sticky-parallax-header-move-and-size linear forwards;
+    animation-timeline: scroll();
+    animation-range: 0vh 90vh;
+    animation-duration: 2s;
+}
+
+@keyframes hide-some {
+    to {
+        opacity: 0;
+    }
+}
+
+body {
+    padding-top: 100vh;
+}
+
+.hide {
+    animation: hide-some linear forwards;
+    animation-timeline: scroll();
+    animation-range: 0vh 50vh;
+}
+
+.angles-down {
+    z-index: 2;
+    animation: hide-angles-down linear;
+    animation-timeline: scroll();
+    animation-range: 20vh 110vh;
+    position: relative;
+    bottom: 10vh;
+}
+
+@keyframes hide-angles-down {
+    to {
+        opacity: 0;
+    }
+}
+
+a {
+    color: #E0E4CC;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 0px;
+    /* width: 10% */
+}
+
+a:hover {
+    color: rgb(6, 166, 113);
+}
+
+.user-profile-pic {
+    animation: resize-profile-pic linear forwards;
+    animation-timeline: scroll();
+    animation-range: 0vh 90vh;
+    animation-duration: 2s;
+}
+
+@keyframes resize-profile-pic {
+    from {
+        width: 100px;
+        height: 100px;
+    }
+
+    to {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.heading {
+    text-align: center;
+    font-size: 50px;
+    color: #333333;
+}

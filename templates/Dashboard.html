@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>YogaConnect+</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/Main.css">
+    <link rel="stylesheet" href="static/css/Profile.css">
+    <link rel="stylesheet" href="static/css/Home.css">
+</head>
+
+<body data-user="{{current_user.username}}">
+    <!-- Content -->
+    <div>
+        <!-- current_user's details are listed here and also an option to add post. -->
+        <div class="user-details-box p-5 " >
+            <img src="static/images/Yoga2.jpg" class="rounded-circle user-profile-pic" alt="">
+            {{current_user.username}}
+            <div class="float-end mt-5 hide">
+                <a class="fa-solid fa-house" style="display:inline-block;width:30px" href="{{url_for("home",username=current_user.username)}}">
+                </a>
+                <a class="fa-solid fa-globe" style="display:inline-block;width:30px" href="{{url_for("explore",username=current_user.username)}}">
+                </a>
+            </div>
+
+        <!--     <table style=" width:50%;"
+        class="bg-transparent hide mt-5 ">
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="text-end"></td>
+            <td></td>
+        </tr>
+    </table>-->
+            <p class="hide mt-5"><strong>Name : </strong>{{current_user.name}}</p>
+            <p class="hide"><strong>Age : </strong>{{current_user.age}}</p>
+            <p class="hide"><strong>Gender : </strong>{{current_user.gender}}</p>
+            <p class="hide"><a href="#followers" data-toggle="modal"><strong>Followers :
+                    </strong></a>{{current_user.followers | length}}</p>
+            <p class="hide"><a href="#following" data-toggle="modal"><strong>Following :
+                    </strong></a>{{current_user.following | length}}</p>
+            
+            {{current_user.type}}
+            {% if current_user.type == "General" %}
+                <p class="hide"><strong>Type : </strong>General</p>
+            {%else%}
+                <p class="hide"><a href="#trainees" data-toggle="modal"><strong>Trainees :
+                    </strong></a>{{current_user.trainees | length}}</p>
+                <p class="hide"><a href="{{url_for('vc',trainer_username=current_user.username)}}" style="font-size:15px"
+                    class="hide">Start a session</a></p>
+            {% endif %}
+
+            <p class="hide"><a href="{{url_for('home',logout_alert = " True")}}" style="font-size:15px"
+                    class="hide">LogOut</a></p>
+            <p class="hide"><a href="{{url_for('del_account',username=current_user.username)}}" style="font-size:15px"
+                    class="hide">Delete Account</a></p>
+
+            <!-- Button trigger modal to add posts. -->
+            <p class="hide mt-5">
+                <button type="button" class="btn btn-primary btn-trainer hide" data-toggle="modal"
+                    data-target="#trainerModal">
+                    Add A Post
+                </button>
+            </p>
+            <!-- /Button trigger modal to add posts. -->
+
+        </div>
+        <!-- /current_user's details. -->
+
+        <!-- Angles Down to unviel the posts. -->
+        <div class="d-flex justify-content-center angles-down">
+            <i class="fa-solid fa-angles-down fa-2xl" style="color: #E0E4CC;"></i>
+        </div>
+        <!-- /Angles Down to unviel the posts. -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="trainerModal" tabindex="-1" aria-labelledby="trainerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="trainerModalLabel">Post</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <h3>Text Post</h3>
+                            <textarea style="background-color:#0D1B2A;color:#E0E4CC" name="text_post_input" id="text_input"
+                                placeholder="Enter Your Thought Here...." rows="5" cols="68"></textarea><br>
+
+                            <br>
+                            <br>
+                        <h3>Image Post</h3>
+                            <input type="file" name="image_post_input" id="image_input">
+                            <br>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-trainer hide" onclick="post()">
+                                Post
+                            </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="followers" tabindex="-1" aria-labelledby="trainerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="trainerModalLabel">Followers</h5>
+                    </div>
+
+                    <div class="modal-body" style="height:15vh;overflow-y:scroll">
+                        {% if current_user.followers %}
+                            <ul class="list-unstyled">
+                                {% for user in current_user.followers %}
+                                    <li>
+                                        <a href="{{url_for("profile",user = user,username=current_user.username)}}">{{user}}</a>
+                                    </li>
+                                <hr>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="following" tabindex="-1" aria-labelledby="trainerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="trainerModalLabel">Following</h5>
+                    </div>
+
+                    <div class="modal-body" style="height:15vh;overflow-y:scroll">
+                        {% if current_user.following %}
+                            <ul class="list-unstyled">
+                                {% for user in current_user.following %}
+                                    <li>
+                                        <a href="{{url_for("profile",user = user,username=current_user.username)}}">{{user}}</a>
+                                    </li>
+                                <hr>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="modal fade" id="followers" tabindex="-1" aria-labelledby="trainerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="trainerModalLabel">Followers</h5>
+                    </div>
+
+                    <div class="modal-body" style="height:15vh;overflow-y:scroll">
+                        {% if current_user.followers %}
+                            <ul class="list-unstyled">
+                                {% for user in current_user.followers %}
+                                    <li>
+                                        <a href="{{url_for("profile",user = user,username=current_user.username)}}">{{user}}</a>
+                                    </li>
+                                <hr>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="trainees" tabindex="-1" aria-labelledby="trainerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="trainerModalLabel">Trainees</h5>
+                    </div>
+
+                    <div class="modal-body" style="height:15vh;overflow-y:scroll">
+                        {% if current_user.trainees %}
+                            <ul class="list-unstyled">
+                                {% for user in current_user.trainees %}
+                                    <li>
+                                        <a href="{{url_for("profile",user = user,username=current_user.username)}}">{{user}}</a>
+                                    </li>
+                                <hr>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Modal -->
+
+        <!-- User posts dynamically generated here. -->
+        <div class="container rounded-4 p-5">
+            {% if posts %}
+            <h2 class="my-4 heading">Your Posts</h2>
+
+            <div id="posts" >
+
+                {% for post in posts %}
+                {% if post["type"] == 'text_image' %}
+                <div class="post-card mx-auto ">
+                    <a href="" class="p-3">{{current_user.username}}</a>
+                    <div>
+                        <img src="data:image/png;base64,{{post["img_content"]}}" alt="None">
+                        <div class="w-5 p-3 m-3 rounded" style="background-color:#204969">{{post['txt_content']}}</div>
+                        <i class="fa-regular p-3 fa-thumbs-up fa-xl reaction-icons"> {{post['likes']}}</i>
+                        <i class="fa-regular fa-thumbs-down fa-xl reaction-icons" style="margin-left: 10px;">
+                            {{post['dislikes']}}</i>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if post['type'] == 'text' %}
+                <div class="post-card mx-auto ">
+                    <a href="" class="p-3">{{current_user.username}}</a>
+                    <div>
+                        <div class="w-5 p-3 m-3 rounded" style="background-color:#204969">{{post['content']}}</div>
+                        <i class="fa-regular p-3 fa-thumbs-up fa-xl reaction-icons"> {{post['likes']}}</i>
+                        <i class="fa-regular fa-thumbs-down fa-xl reaction-icons" style="margin-left: 10px;">
+                            {{post['dislikes']}}</i>
+                    </div>
+                </div>
+                {%else%}
+                <div class="post-card mx-auto">
+                    <a href="" class="p-3">{{current_user.username}}</a>
+                    <img src="data:image/png;base64,{{post["content"]}}" alt="None">
+                    <div class=" p-3">
+                        <i class="fa-regular fa-thumbs-up fa-xl reaction-icons"> {{post['likes']}}</i>
+                        <i class="fa-regular fa-thumbs-down fa-xl reaction-icons" style="margin-left: 10px;">
+                            {{post['dislikes']}}</i>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% endfor %}
+            </div>
+
+            {%else%}
+            <h2 class="my-4 heading" style="height:50vh">No Posts Yet</h2>
+            {% endif %}
+        </div>
+        <!-- User posts dynamically generated here -->
+    </div>
+    <!-- /Content -->
+
+    <!-- Footer. -->
+    <footer class="w-100 bottom">
+        <div class="container-fluid justify-content-end row footer-height">
+            <div class="container-fluid col-sm-2 mt-3">
+                <img src="static/images/Logo.png" alt="Logo" width="280px">
+            </div>
+            <div class=" container-fluid col-sm-8 mt-5 text-center">
+                <a class="fa-brands fa-2xl fa-instagram m-3"></a>
+                <a class="fa-brands fa-facebook fa-2xl m-3"></a>
+                <a class="fa-brands fa-youtube fa-2xl m-3"></a>
+                <a class="fa-brands fa-threads fa-2xl m-3"></a>
+            </div>
+            <div class=" container-fluid col-sm mt-5">
+                <dl>
+                    <dt>
+                        Contact Us
+                    </dt>
+                    <dd class="mt-2">
+                        Contact Us : +77990717818
+                        <br>
+                        Email : hetavi.shah05@gmail.com
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+    </footer>
+    <!-- /Footer. -->
+
+    <!-- Script. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/abdff43453.js" crossorigin="anonymous"></script>
+    <script src="static/js/Main.js"></script>
+    <script src="static/js/Dashboard.js"></script>
+    <script>
+        function image_post(){
+            var username = document.body.getAttribute("data-user")
+            var image_input = document.getElementById("image_input")
+            fetch(`/image_post/${username}`, {
+            method: "POST",
+            body: JSON.stringify({ "image": image_input.value }), // Sending search input as JSON data
+            headers: {
+                "Content-Type": "application/json"
+            },
+            })
+            .then(response => {
+                if (!response.ok) {
+                throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Optionally handle response data
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
+        }
+
+        function post(){
+            var username = document.body.getAttribute("data-user")
+            var image_input = document.getElementById("image_input")
+            var text_input = document.getElementById("text_input")
+            console.log(image_input.value)
+            fetch(`/post/${username}`, {
+            method: "POST",
+            body: JSON.stringify({ "image": image_input.value, "text": text_input.value }), // Sending search input as JSON data
+            headers: {
+                "Content-Type": "application/json"
+            },
+            })
+            .then(response => {
+                if (!response.ok) {
+                throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Optionally handle response data
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
+        }
+
+        function text_post(){
+            var username = document.body.getAttribute("data-user")
+            var text_input = document.getElementById("text_input")
+            fetch(`/text_post/${username}`, {
+            method: "POST",
+            body: JSON.stringify({ "text": text_input.value }), // Sending search input as JSON data
+            headers: {
+                "Content-Type": "application/json"
+            },
+            })
+            .then(response => {
+                if (!response.ok) {
+                throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Optionally handle response data
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+/* Trainers data */
+.trainer-card {
+    margin: 10px;
+    padding: 10px;
+    background-color: #08294b;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.trainer-card>h5 {
+    font-size: 80%;
+}
+
+.trainer-card:hover {
+    transform: scale(1.03);
+    border-radius: 10px;
+}
+
+.trainer-card>img {
+    max-height: 100px;
+    min-width: 200px;
+}
+
+.cards {
+    overflow-x: auto;
+    width: 100%;
+}
+
+a {
+    color: #08294b;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue !important;
+}
+
+div a {
+    color: #E0E4CC;
+    text-decoration: none;
+}
+
+.trainer-card button {
+    background-color: #E0E4CC !important;
+}
+
+.trainer-card a {
+    color: #08294b;
+    text-decoration: none;
+}
+
+.trainer-card a:hover {
+    color: blue;
+}
+
+/* /Trainers data */
+
+/* Posts */
+
+.post-img {
+    width: 100%;
+}
+
+.post-card {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #08294b;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 50%;
+}
+
+.post-card:hover {
+    transform: scale(1.03);
+}
+
+.reaction-icons {
+    display: flex;
+    cursor: pointer;
+}
+
+
+.like-icon,
+.dislike-icon {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.post-card,
+.cards,
+.heading {
+    animation: animate-in-and-out linear;
+    animation-timeline: view(block);
+    animation-range: cover 0% cover 45%;
+}
+
+/* /Posts */
