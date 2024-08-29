@@ -48,7 +48,9 @@ def explore():
         posts = fetch_posts()
         random.shuffle(posts)
         posts = posts[:15]
-        curr.execute(f"SELECT * FROM users WHERE username LIKE '%{request.form.get("search")}%'")
+        search_term = request.form.get("search")
+        curr.execute("SELECT * FROM users WHERE username LIKE ?", ('%' + search_term + '%',))
+        # curr.execute(f"SELECT * FROM users WHERE username LIKE '%{request.form.get("search")}%'")
         search_results = curr.fetchall()
         if current_user:    
             return render_template('Explore.html',data = data,posts = posts,search_results=search_results,username=current_user.username)
