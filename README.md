@@ -6,3 +6,6 @@
 - Python
 - HTML
 - Flask
+
+# Project Details
+- This application is about Yoga online teching
